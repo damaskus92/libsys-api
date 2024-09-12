@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Book\StoreRequest;
-use App\Http\Requests\Book\UpdateRequest;
+use App\Http\Requests\BookRequest;
 use App\Http\Resources\BookResource;
 use App\Repositories\Book\BookRepositoryInterface;
 use Illuminate\Http\JsonResponse;
@@ -21,7 +20,11 @@ class BookController extends Controller
     }
 
     /**
+     * List books.
+     *
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(): AnonymousResourceCollection
     {
@@ -33,9 +36,15 @@ class BookController extends Controller
     }
 
     /**
+     * Create new book.
+     *
      * Store a newly created resource in storage.
+     *
+     * @param \App\Http\Requests\BookRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreRequest $request): JsonResponse
+    public function store(BookRequest $request): JsonResponse
     {
         $book = $this->bookRepository->create($request->validated());
 
@@ -47,7 +56,13 @@ class BookController extends Controller
     }
 
     /**
+     * Show book.
+     *
      * Display the specified resource.
+     *
+     * @param int|mixed $id Book ID to be retrieved.
+     *
+     * @return \App\Http\Resources\BookResource|\Illuminate\Http\JsonResponse
      */
     public function show($id): BookResource|JsonResponse
     {
@@ -65,9 +80,16 @@ class BookController extends Controller
     }
 
     /**
+     * Update book.
+     *
      * Update the specified resource in storage.
+     *
+     * @param \App\Http\Requests\BookRequest $request
+     * @param int|mixed $id Book ID to be updated.
+     *
+     * @return \App\Http\Resources\BookResource|\Illuminate\Http\JsonResponse
      */
-    public function update(UpdateRequest $request, $id): BookResource|JsonResponse
+    public function update(BookRequest $request, $id): BookResource|JsonResponse
     {
         $book = $this->bookRepository->find($id);
 
@@ -86,7 +108,13 @@ class BookController extends Controller
     }
 
     /**
+     * Delete book.
+     *
      * Remove the specified resource from storage.
+     *
+     * @param int|mixed $id Book ID to be deleted.
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id): JsonResponse
     {
