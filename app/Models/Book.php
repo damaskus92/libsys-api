@@ -39,7 +39,7 @@ class Book extends Model
     protected function casts(): array
     {
         return [
-            'publish_date' => 'date',
+            'publish_date' => 'date:Y-m-d',
         ];
     }
 
