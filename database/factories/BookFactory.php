@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Author;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Book>
@@ -20,7 +21,7 @@ class BookFactory extends Factory
         return [
             'title' => fake()->sentence(fake()->randomDigitNotNull()),
             'description' => fake()->paragraph(),
-            'publish_date' => fake()->date(),
+            'publish_date' => Carbon::now()->format('Y-m-d'),
             'author_id' => Author::factory(),
         ];
     }

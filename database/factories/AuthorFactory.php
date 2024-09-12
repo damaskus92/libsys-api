@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Author>
@@ -19,7 +20,7 @@ class AuthorFactory extends Factory
         return [
             'name' => fake()->name(),
             'bio' => fake()->paragraph(),
-            'birth_date' => fake()->date(max: '-25 years'),
+            'birth_date' => Carbon::parse(fake()->date(max: '-25 years'))->format('Y-m-d'),
         ];
     }
 }
