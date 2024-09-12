@@ -9,6 +9,7 @@ use App\Http\Resources\BookResource;
 use App\Repositories\Book\BookRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Cache;
 
 class BookController extends Controller
 {
@@ -24,7 +25,9 @@ class BookController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        $books = $this->bookRepository->all();
+        $books = Cache::remember('books_all', 60, function () {
+            return $this->bookRepository->all();
+        });
 
         return BookResource::collection($books);
     }
@@ -36,6 +39,8 @@ class BookController extends Controller
     {
         $book = $this->bookRepository->create($request->validated());
 
+        Cache::forget('books_all');
+
         return (new BookResource($book))
             ->response()
             ->setStatusCode(201);
@@ -46,9 +51,11 @@ class BookController extends Controller
      */
     public function show($id): BookResource|JsonResponse
     {
-        $book = $this->bookRepository->find($id);
+        $book = Cache::remember("books_{$id}", 60, function () use ($id) {
+            return $this->bookRepository->find($id);
+        });
 
-        if (!$book) {
+        if (!$book || empty($book)) {
             return response()->json([
                 'message' => 'Book not found.'
             ], 404);
@@ -64,13 +71,16 @@ class BookController extends Controller
     {
         $book = $this->bookRepository->find($id);
 
-        if (!$book) {
+        if (!$book || empty($book)) {
             return response()->json([
                 'message' => 'Book not found.'
             ], 404);
         }
 
         $book->update($request->validated());
+
+        Cache::forget("books_{$id}");
+        Cache::forget('books_all');
 
         return new BookResource($book);
     }
@@ -82,13 +92,16 @@ class BookController extends Controller
     {
         $book = $this->bookRepository->find($id);
 
-        if (!$book) {
+        if (!$book || empty($book)) {
             return response()->json([
                 'message' => 'Book not found.'
             ], 404);
         }
 
         $book->delete();
+
+        Cache::forget("books_{$id}");
+        Cache::forget('books_all');
 
         return response()->json([
             'message' => 'Book deleted successfully.'
