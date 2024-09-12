@@ -46,6 +46,34 @@ it('can create a new author', function () {
     $this->assertDatabaseHas('authors', $author);
 });
 
+it('cannot create an author with empty data', function () {
+    $author = [
+        'name'       => '',
+        'bio'        => '',
+        'birth_date' => '',
+    ];
+
+    post('/api/authors', $author)
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors([
+            'name',
+            'bio',
+            'birth_date',
+        ]);
+});
+
+it('cannot create an author with wrong date format', function () {
+    $author = [
+        'birth_date' => '12-12-2024',
+    ];
+
+    post('/api/authors', $author)
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors([
+            'birth_date',
+        ]);
+});
+
 it('can fetch a specific author', function () {
     $author = Author::factory()->create();
 
@@ -57,6 +85,14 @@ it('can fetch a specific author', function () {
                 ->response()
                 ->getData(true)
         );
+});
+
+it('return 404 if fetching non-existent author', function () {
+    get('/api/authors/999')
+        ->assertNotFound()
+        ->assertJson([
+            'message' => 'Author not found.'
+        ]);
 });
 
 it('can update an existing author', function () {

@@ -50,6 +50,36 @@ it('can create a new book', function () {
     $this->assertDatabaseHas('books', $book);
 });
 
+it('cannot create a book with empty data', function () {
+    $book = [
+        'title'        => '',
+        'description'  => '',
+        'publish_date' => '',
+        'author_id'    => '',
+    ];
+
+    post('/api/books', $book)
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors([
+            'title',
+            'description',
+            'publish_date',
+            'author_id',
+        ]);
+});
+
+it('cannot create a book with wrong date format', function () {
+    $book = [
+        'publish_date' => '12-12-2024',
+    ];
+
+    post('/api/books', $book)
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors([
+            'publish_date',
+        ]);
+});
+
 it('can fetch a specific book', function () {
     $book = Book::factory()->create();
 
@@ -61,6 +91,14 @@ it('can fetch a specific book', function () {
                 ->response()
                 ->getData(true)
         );
+});
+
+it('return 404 if fetching non-existent book', function () {
+    get('/api/books/999')
+        ->assertNotFound()
+        ->assertJson([
+            'message' => 'Book not found.'
+        ]);
 });
 
 it('can update an existing book', function () {
