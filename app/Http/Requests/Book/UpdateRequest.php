@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Book;
 
+use App\Http\Requests\BaseRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class UpdateRequest extends BaseRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,7 +17,7 @@ class UpdateRequest extends FormRequest
         return [
             'title'        => 'required|string',
             'description'  => 'required|string',
-            'publish_date' => 'required|date',
+            'publish_date' => 'required|date|date_format:Y-m-d',
             'author_id'    => 'required|exists:authors,id',
         ];
     }

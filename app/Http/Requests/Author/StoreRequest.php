@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Author;
 
+use App\Http\Requests\BaseRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class StoreRequest extends BaseRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,7 +17,7 @@ class StoreRequest extends FormRequest
         return [
             'name'       => 'required|string',
             'bio'        => 'required|string',
-            'birth_date' => 'required|date',
+            'birth_date' => 'required|date|date_format:Y-m-d',
         ];
     }
 }
