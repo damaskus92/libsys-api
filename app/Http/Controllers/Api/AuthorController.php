@@ -44,9 +44,15 @@ class AuthorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id): AuthorResource
+    public function show($id): AuthorResource|JsonResponse
     {
         $author = $this->authorRepository->find($id);
+
+        if (!$author) {
+            return response()->json([
+                'message' => 'Author not found.'
+            ], 404);
+        }
 
         return new AuthorResource($author);
     }
@@ -54,9 +60,16 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, $id): AuthorResource
+    public function update(UpdateRequest $request, $id): AuthorResource|JsonResponse
     {
         $author = $this->authorRepository->find($id);
+
+        if (!$author) {
+            return response()->json([
+                'message' => 'Author not found.'
+            ], 404);
+        }
+
         $author->update($request->validated());
 
         return new AuthorResource($author);
@@ -68,6 +81,13 @@ class AuthorController extends Controller
     public function destroy($id): JsonResponse
     {
         $author = $this->authorRepository->find($id);
+
+        if (!$author) {
+            return response()->json([
+                'message' => 'Author not found.'
+            ], 404);
+        }
+
         $author->delete();
 
         return response()->json([

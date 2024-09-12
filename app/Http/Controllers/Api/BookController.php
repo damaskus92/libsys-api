@@ -44,9 +44,15 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id): BookResource
+    public function show($id): BookResource|JsonResponse
     {
         $book = $this->bookRepository->find($id);
+
+        if (!$book) {
+            return response()->json([
+                'message' => 'Book not found.'
+            ], 404);
+        }
 
         return new BookResource($book);
     }
@@ -54,9 +60,16 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, $id): BookResource
+    public function update(UpdateRequest $request, $id): BookResource|JsonResponse
     {
         $book = $this->bookRepository->find($id);
+
+        if (!$book) {
+            return response()->json([
+                'message' => 'Book not found.'
+            ], 404);
+        }
+
         $book->update($request->validated());
 
         return new BookResource($book);
@@ -68,6 +81,13 @@ class BookController extends Controller
     public function destroy($id): JsonResponse
     {
         $book = $this->bookRepository->find($id);
+
+        if (!$book) {
+            return response()->json([
+                'message' => 'Book not found.'
+            ], 404);
+        }
+
         $book->delete();
 
         return response()->json([
