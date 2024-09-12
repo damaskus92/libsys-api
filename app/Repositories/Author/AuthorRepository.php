@@ -13,4 +13,11 @@ class AuthorRepository extends Repository implements AuthorRepositoryInterface
     {
         $this->model = $author;
     }
+
+    public function getBooksByAuthor($id)
+    {
+        $author = $this->model->with('books')->findOrFail($id);
+
+        return $author;
+    }
 }
