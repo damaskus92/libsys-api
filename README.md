@@ -1,143 +1,143 @@
 # LIBSYS (Library Management System)
 
-## System Requirement
+## System Requirements
 
-Untuk menjalankan aplikasi ini, Anda memerlukan:
+To run this application, you will need:
 
-- PHP versi 8.0 atau lebih baru
+- PHP version 8.0 or later
 - Composer
-- MySQL atau database lainnya yang didukung Laravel
-- Node.js dan NPM (Opsional)
+- MySQL or other database supported by Laravel
+- Node.js and NPM (Optional)
 
-## Cara Install
+## How to Install
 
-Berikut adalah langkah-langkah untuk mengkloning proyek ini dan menginstalnya di lingkungan lokal Anda:
+Here are the steps to clone this project and install it in your local environment:
 
-1. **Kloning Repositori**
+1. **Clone Repository**
 
-   Pertama, kloning repositori ini ke direktori lokal Anda menggunakan perintah git:
+    First, clone this repository to your local directory using the git command:
 
-   ```bash
-   git clone https://github.com/damaskus92/libsys-api.git
-   ```
+    ```bash
+    git clone https://github.com/damaskus92/libsys-api.git
+    ```
 
-2. **Masuk ke Direktori Proyek**
+2. **Go to Project Directory**
 
-   Pindah ke direktori proyek yang baru saja dikloning:
+    Move to the newly cloned project directory:
 
-   ```bash
-   cd libsys-api
-   ```
+    ```bash
+    cd libsys-api
+    ```
 
-3. **Install Dependensi PHP dengan Composer**
+3. **Install PHP Dependencies with Composer**
 
-   Jalankan perintah berikut untuk menginstal semua dependensi PHP yang diperlukan:
+    Run the following command to install all dependencies PHP Required:
 
-   ```bash
-   composer install
-   ```
+    ```bash
+    composer install
+    ```
 
-4. **Install Dependensi JavaScript dengan NPM (Opsional)**
+4. **Install JavaScript Dependencies with NPM (Optional)**
 
-   Untuk mengelola dependensi front-end dan mengkompilasi asset, jalankan:
+    To manage front-end dependencies and compile assets, run:
 
-   ```bash
-   npm install
-   npm run dev
-   ```
+    ```bash
+    npm install
+    npm run dev
+    ```
 
-5. **Salin File `.env`**
+5. **Copy `.env` File**
 
-   Buat salinan dari file `.env.example` dan beri nama `.env`:
+    Make a copy of the `.env.example` file and name it `.env`:
 
-   ```bash
-   cp .env.example .env
-   ```
+    ```bash
+    cp .env.example .env
+    ```
 
-6. **Atur Kunci Aplikasi**
+6. **Set Application Key**
 
-   Buat kunci aplikasi baru dengan perintah berikut:
+    Create a new application key with the following command:
 
-   ```bash
-   php artisan key:generate
-   ```
+    ```bash
+    php artisan key:generate
+    ```
 
-7. **Konfigurasi Database**
+7. **Database Configuration**
 
-   Buka file `.env` dan sesuaikan konfigurasi database sesuai dengan pengaturan lokal Anda:
+    Open the `.env` file and adjust the database configuration according to your locale:
 
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=libsys
-   DB_USERNAME=root
-   DB_PASSWORD=
-   ```
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=libsys
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
 
-8. **Migrasi dan Seeding Database**
+8. **Database Migration and Seeding**
 
-   Jalankan migrasi untuk membuat tabel database dan seeder untuk mengisi data awal (jika ada):
+    Run migrations to create database tables and seeders to populate initial data (if any):
 
-   ```bash
-   php artisan migrate --seed
-   ```
+    ```bash
+    php artisan migrate --seed
+    ```
 
-9. **Jalankan Server Aplikasi**
+9. **Run Application Server**
 
-   Jalankan server pengembangan Laravel menggunakan perintah berikut:
+    Start Laravel development server using the following command:
 
-   ```bash
-   php artisan serve
-   ```
+    ```bash
+    php artisan serve
+    ```
 
-   Aplikasi akan berjalan di <http://localhost:8000>.
+    The application will run on <http://localhost:8000>.
 
-## Pengujian
+## Testing
 
-Untuk menjalankan pengujian, kita dapat menggunakan file `.env.testing` untuk konfigurasi lingkungan pengujian.
+To run tests, we can use the `.env.testing` file for the test environment configuration.
 
-1. **Buat File `.env.testing`**
+1. **Create `.env.testing` File**
 
-   Buat file `.env.testing` dengan menyalin file `.env`:
+    Create `.env.testing` file by copying `.env` file:
 
-   ```bash
-   cp .env .env.testing
-   ```
+    ```bash
+    cp .env .env.testing
+    ```
 
-   Ubah pengaturan database di `.env.testing` sesuai dengan database pengujian Anda:
+    Change database settings in `.env.testing` according to your test database:
 
-   ```bash
-   DB_CONNECTION=sqlite
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_USERNAME=root
-   DB_PASSWORD=
-   ```
+    ```bash
+    DB_CONNECTION=sqlite
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
 
-2. **Buat Database Pengujian**
+2. **Create Test Database**
 
-   Buat database SQlite untuk pengujian:
+    Create SQlite database for testing:
 
-   ```bash
-   touch database/database.sqlite
-   ```
+    ```bash
+    touch database/database.sqlite
+    ```
 
-3. **Migrasi Tabel**
+3. **Migrate Tables**
 
-   Jalankan migrasi untuk membuat tabel pengujian:
+    Run migrations to create test tables:
 
-   ```bash
-   php artisan migrate --env=testing
-   ```
+    ```bash
+    php artisan migrate --env=testing
+    ```
 
-4. **Jalankan Pengujian**
+4. **Run Test**
 
-   Gunakan perintah di bawah ini untuk menjalankan pengujian:
+    Use the command below to run the test:
 
-   ```bash
-   php artisan test
-   ```
+    ```bash
+    php artisan test
+    ```
 
 ## Author
 
