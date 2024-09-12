@@ -1,9 +1,5 @@
 # LIBSYS (Library Management System)
 
-## Deskripsi Aplikasi
-
-Ini adalah deskripsi singkat dari aplikasi yang dikembangkan menggunakan framework Laravel. Aplikasi ini menyediakan [deskripsi singkat fitur atau tujuan aplikasi], yang dirancang untuk memudahkan [target pengguna] dalam [fungsi utama aplikasi].
-
 ## System Requirement
 
 Untuk menjalankan aplikasi ini, Anda memerlukan:
@@ -22,7 +18,7 @@ Berikut adalah langkah-langkah untuk mengkloning proyek ini dan menginstalnya di
    Pertama, kloning repositori ini ke direktori lokal Anda menggunakan perintah git:
 
    ```bash
-   git clone https://github.com/username/repo-name.git
+   git clone https://github.com/damaskus92/libsys-api.git
    ```
 
 2. **Masuk ke Direktori Proyek**
@@ -30,7 +26,7 @@ Berikut adalah langkah-langkah untuk mengkloning proyek ini dan menginstalnya di
    Pindah ke direktori proyek yang baru saja dikloning:
 
    ```bash
-   cd repo-name
+   cd libsys-api
    ```
 
 3. **Install Dependensi PHP dengan Composer**
@@ -134,3 +130,7 @@ Untuk menjalankan pengujian, kita dapat menggunakan file `.env.testing` untuk ko
    ```bash
    php artisan test
    ```
+
+## Author
+
+### [Damas Eka Kusuma](https://github.com/damaskus92)
