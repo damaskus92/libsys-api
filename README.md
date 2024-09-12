@@ -123,7 +123,15 @@ Untuk menjalankan pengujian, kita dapat menggunakan file `.env.testing` untuk ko
    touch database/database.sqlite
    ```
 
-3. **Jalankan Pengujian**
+3. **Migrasi Tabel**
+
+   Jalankan migrasi untuk membuat tabel pengujian:
+
+   ```bash
+   php artisan migrate --env=testing
+   ```
+
+4. **Jalankan Pengujian**
 
    Gunakan perintah di bawah ini untuk menjalankan pengujian:
 
